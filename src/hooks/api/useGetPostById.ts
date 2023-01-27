@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 interface useGetPostByIdProps {
@@ -6,16 +7,17 @@ interface useGetPostByIdProps {
 }
 
 function useGetPostById({ id }: useGetPostByIdProps) {
-  const [post, setPost] = useState<IGetPost | null>(null);
+  const [post, setPost] = useState<IGetPostContent | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const router = useRouter();
 
   useEffect(() => {
     async function getPostById(id: string) {
       setIsLoading(true);
-      const response = await axios.get<{}, IGetPost>(
+      const response = await axios.get(
         `http://3.36.64.80:80/api/categories/${id}`
       );
-      //   setPost(response.);
+      setPost(response.data);
       setIsLoading(false);
     }
 

@@ -21,6 +21,7 @@ export default OneLineContent;
 
 const summaryWrapper = css`
   margin: 0.7rem 0rem;
+  font-size: 1.3rem;
 `;
 
 const summaryContent = (theme: Theme) => css`

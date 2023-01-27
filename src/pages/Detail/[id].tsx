@@ -1,37 +1,30 @@
 /** @jsxImportSource @emotion/react */
 import { css, Theme } from "@emotion/react";
+import axios from "axios";
 import Footer from "components/Footer";
 import Nav from "components/Nav";
 import useGetPostById from "hooks/api/useGetPostById";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 function Detail() {
   const {
     query: { id },
   } = useRouter();
 
-  const { post, isLoading } = useGetPostById({
-    id,
-  });
-
-  if (isLoading) {
-    return "로딩중..";
-  }
+  const { post } = useGetPostById({ id });
 
   return (
     <>
       <Nav />
       <div css={wrapper}>
-        <h1 css={titleWrapper}>{post?.title}제목이에용</h1>
+        <h1 css={titleWrapper}>{post?.id}</h1>
         <div css={authorWrapper}>
           <div></div>
-          <span>{post?.author}닉네임이에요</span>
+          <span>{post?.author}</span>
         </div>
-        <div css={contentWrapper}>
-          {post?.content}
-          내용이에요
-        </div>
+        <div css={contentWrapper}>{post?.content}</div>
         <div css={buttonWrapper}>
           <Link href="/Post">
             <button css={button}>목록보기</button>
@@ -76,7 +69,6 @@ const buttonWrapper = css`
 
 const button = (theme: Theme) => css`
   color: ${theme.color.white};
-  border: 1px solid ${theme.color.black};
   background-color: ${theme.color.black};
   min-width: 7.5rem;
   height: 2.5rem;

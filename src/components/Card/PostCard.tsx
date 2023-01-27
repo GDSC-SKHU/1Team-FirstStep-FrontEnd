@@ -1,19 +1,19 @@
 /** @jsxImportSource @emotion/react */
 import { css, Theme } from "@emotion/react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
-function PostCard() {
-  const {
-    query: { id },
-  } = useRouter();
+interface Props {
+  id: IGetPostContent["id"];
+  title: IGetPostContent["title"];
+}
 
+function PostCard({ id, title }: Props) {
   return (
     <Link href={`/Detail/${id}`}>
       <div css={wrapper}>
         <div css={contentWrapper}>
           <span css={subTitle}>👣</span>
-          <span css={title}>제목이에용</span>
+          <span css={titleCss}>{title}</span>
         </div>
         <div css={colorBg}></div>
       </div>
@@ -28,6 +28,7 @@ const wrapper = css`
   position: relative;
   width: 18rem;
   height: 15rem;
+  margin-right: 0.65rem;
   margin-top: 2.25rem;
   border-radius: 14px;
   box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 9%);
@@ -44,7 +45,7 @@ const subTitle = css`
   margin: 0.2rem 0;
 `;
 
-const title = (theme: Theme) => css`
+const titleCss = (theme: Theme) => css`
   font-weight: ${theme.fontWeight.bold};
   font-size: 1.6rem;
   letter-spacing: 0.5px;
