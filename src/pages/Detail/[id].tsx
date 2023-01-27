@@ -5,8 +5,7 @@ import Footer from "components/Footer";
 import Nav from "components/Nav";
 import useGetPostById from "hooks/api/useGetPostById";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router"; 
 
 function Detail() {
   const {

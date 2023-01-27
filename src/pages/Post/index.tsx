@@ -61,11 +61,18 @@ function Post() {
         </div>
         <div css={postListWrapper}>
           {postList.map((e, index) => {
-            return <PostCard key={index} title={e.title} id={e.id} />;
+            return (
+              <PostCard
+                key={index}
+                title={e.title}
+                id={e.id}
+                author={e.author}
+              />
+            );
           })}
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
@@ -73,14 +80,16 @@ function Post() {
 export default Post;
 
 const postListWrapper = css`
-  display: flex;
-  flex-direction: row;
-  margin: 1rem 4.7rem;
+  display: grid;
+  grid-template-columns: 20rem 20rem 20rem 20rem;
+  margin: 1rem 8rem;
+  width: 100%;
+  height: 100%;
 `;
 
 const wrapper = css`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   margin: 2.5rem 0;
 `;
 

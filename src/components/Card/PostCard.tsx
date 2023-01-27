@@ -5,14 +5,16 @@ import Link from "next/link";
 interface Props {
   id: IGetPostContent["id"];
   title: IGetPostContent["title"];
+  author: IGetPostContent["author"];
 }
 
-function PostCard({ id, title }: Props) {
+function PostCard({ id, title, author }: Props) {
   return (
     <Link href={`/Detail/${id}`}>
       <div css={wrapper}>
         <div css={contentWrapper}>
           <span css={subTitle}>👣</span>
+          <p css={subTitle}>{author}</p>
           <span css={titleCss}>{title}</span>
         </div>
         <div css={colorBg}></div>
@@ -40,15 +42,17 @@ const contentWrapper = css`
   padding: 2rem 1.5rem;
 `;
 
-const subTitle = css`
+const subTitle = (theme: Theme) => css`
   font-size: 0.8rem;
   margin: 0.2rem 0;
+  font-weight: ${theme.fontWeight.light};
 `;
 
 const titleCss = (theme: Theme) => css`
   font-weight: ${theme.fontWeight.bold};
   font-size: 1.6rem;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.7px;
+
 `;
 
 const colorBg = (theme: Theme) => css`
