@@ -1,15 +1,18 @@
 /** @jsxImportSource @emotion/react */
 import { css, Theme } from "@emotion/react";
+import axios from "axios";
 import PostCard from "components/Card/PostCard";
 import Circle from "components/Category/Circle";
 import Footer from "components/Footer";
 import Nav from "components/Nav";
 import Section from "components/Text/Section";
+import useGetPostById from "hooks/api/useGetPostById";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 function Post() {
   const categoryArray = [
-    { category: "전체", path: "/" },
+    { category: "전체", path: "/Post" },
     { category: "진로", path: "/" },
     { category: "사회", path: "/" },
     { category: "경제", path: "/" },
@@ -19,6 +22,20 @@ function Post() {
     { category: "대학", path: "/" },
     { category: "유흥", path: "/" },
   ];
+
+  const [postList, setPostList] = useState<IGetPostContent[]>([]);
+
+  async function getPost() {
+    const response = await axios.get<{}, IGetPost>(
+      "http://3.36.64.80:80/api/categories"
+    );
+    setPostList(response.data);
+  }
+
+  useEffect(() => {
+    getPost();
+  }, []);
+
   return (
     <>
       <Nav />
@@ -30,6 +47,7 @@ function Post() {
             <button css={newPostButton}>글 작성하기</button>
           </Link>
         </div>
+
         <div css={categoryWrapper}>
           {categoryArray.map((category, index) => {
             return (
@@ -40,19 +58,38 @@ function Post() {
               />
             );
           })}
-          <PostCard />
+        </div>
+        <div css={postListWrapper}>
+          {postList.map((e, index) => {
+            return (
+              <PostCard
+                key={index}
+                title={e.title}
+                id={e.id}
+                author={e.author}
+              />
+            );
+          })}
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
 
 export default Post;
 
+const postListWrapper = css`
+  display: grid;
+  grid-template-columns: 20rem 20rem 20rem 20rem;
+  margin: 1rem 8rem;
+  width: 100%;
+  height: 100%;
+`;
+
 const wrapper = css`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   margin: 2.5rem 0;
 `;
 

@@ -57,7 +57,7 @@ const LogIn = () => {
             value={password}
           />
           <div css={submitBtn}>
-            <Link href="Register/signUp">
+            <Link href="/Register/signUp">
               <button>회원가입</button>
             </Link>
             <button type="submit">로그인</button>

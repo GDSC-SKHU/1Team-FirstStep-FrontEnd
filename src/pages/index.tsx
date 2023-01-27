@@ -38,7 +38,7 @@ function Home() {
             <div css={summaryWrapper}>
               <OneLineContent summary="사회에 나오니 두렵고 막막해, 뭐를 어떻게 시작하면 좋을까?" />
               <OneLineContent
-                summary="  가보지 않은 길은 실패의 위험이 따르지만 그에서 오는 경험은 그
+                summary="가보지 않은 길은 실패의 위험이 따르지만 그에서 오는 경험은 그
               무엇보다 값집니다."
               />
               <OneLineContent
@@ -145,6 +145,7 @@ const wrapper = css`
 const lottieWrapper = css`
   width: 100%;
   height: 100%;
+  margin: 0.4rem 0rem;
 `;
 
 const cardWrapper = css`
